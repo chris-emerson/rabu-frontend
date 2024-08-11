@@ -1,6 +1,8 @@
 # Rabu Frontend
 
-This project provides an interactive mapping application for a travel planning application.
+This repository contains a single page application for a Generative AI search application. The application allows the user to discover new Trip ideas by clicking around a map. To run the application, you will also need to also run the [rabu-backend](https://github.com/chris-emerson/rabu-backend) django project. 
+
+![UseCases](src/docs/app_preview2.png?raw=true)
 
 ## Available Scripts
 
