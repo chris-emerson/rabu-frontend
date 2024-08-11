@@ -3,11 +3,14 @@ import Tab from '@mui/material/Tab';
 import { Activities } from "../Activities/Activities"
 import { useEffect, useState } from 'react';
 import { Button, Paper, Typography, useTheme } from '@mui/material';
-import { actions, selectActiveItinerary, generateItinerary, isLoading, selectActiveItineraryItem, selectActiveItineraryItemGroupId } from '../../features/itinerary/itinerarySlice';
+import { actions, 
+    selectActiveItinerary,
+     generateItinerary, 
+     isLoading, 
+     selectActiveItineraryItem
+     } from '../../features/itinerary/itinerarySlice';
 import Loader from '../Loader/Loader'
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-
-
 
 export const TripPlanner = () => {
     const theme = useTheme()

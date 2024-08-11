@@ -2,6 +2,7 @@
 import { renderWithProviders } from '../../testing/renderComponent';
 import { itineraryItemFactory } from '../../testing/factories/itineraryFactories';
 import { Activity, ActivityProps } from './Activity';
+import { screen } from '@testing-library/react'
 
 describe('Activity Component Test', () => {
     it('should render the description successfully', () => {
@@ -12,9 +13,9 @@ describe('Activity Component Test', () => {
         const props: ActivityProps = {
             itineraryItem: testItem
         }
-        const component = renderWithProviders(<Activity {...props} />, {})
+        renderWithProviders(<Activity {...props} />, {})
         
-        expect(component.getByText(testItem.activity)).toBeTruthy()
+        expect(screen.getByText(testItem.activity)).toBeTruthy()
     })
 
     it('should render the image successfully', () => {
@@ -27,8 +28,8 @@ describe('Activity Component Test', () => {
         const props: ActivityProps = {
             itineraryItem: testItem
         }
-        const component = renderWithProviders(<Activity {...props} />, {})
-        const image = component.getByAltText(testItem.activity!);
+        renderWithProviders(<Activity {...props} />, {})
+        const image = screen.getByAltText(testItem.activity!);
 
         expect(image).toHaveAttribute('src', testUrl )
     })

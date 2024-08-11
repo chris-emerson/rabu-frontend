@@ -1,11 +1,7 @@
 import { renderWithProviders } from '../../testing/renderComponent';
 import { THREE_DAY_ITINERARY, itineraryStateFactory } from '../../testing/factories/itineraryFactories';
 import { Activities } from './Activities';
-
-// jest.mock("react-redux", () => ({
-//     ...jest.requireActual("react-redux"),
-//     useAppSelector: jest.fn()
-//   }));
+import { screen } from '@testing-library/react'
 
 describe('Activities Component Test', () => {
     it('should render the activities and display the expected description', () => {
@@ -17,11 +13,11 @@ describe('Activities Component Test', () => {
                 activeItineraryItemId: itinerary.itemGroups[0].items[0].id,
                 activeItineraryItemGroupId: itinerary.itemGroups[0].id
         })}
-        const container = renderWithProviders(<Activities/>, {
+        renderWithProviders(<Activities/>, {
             preloadedState: preloadedState})
 
         const expected_description = itinerary.itemGroups[0].items[0].description
-        expect(container.getByText(expected_description)).toBeTruthy()
+        expect(screen.getByText(expected_description)).toBeTruthy()
     })
 
 })

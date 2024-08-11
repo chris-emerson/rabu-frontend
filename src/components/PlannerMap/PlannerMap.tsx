@@ -1,16 +1,13 @@
 import { useEffect, useState } from 'react';
 import Map, { Source, useMap, Marker, Layer, } from 'react-map-gl/maplibre';
-
-import { useTheme } from '@mui/material';
 import { TripPlanner } from '../TripPlanner/TripPlanner';
-import { MapCoordinates, actions, selectActiveItinerary, ItineraryItem, Itinerary, selectCursor, selectSearchCursor, newForest, generateItinerary, ItineraryItemGroup } from '../../features/itinerary/itinerarySlice';
+import { MapCoordinates, actions, selectActiveItinerary, ItineraryItem, Itinerary, selectCursor, newForest, ItineraryItemGroup } from '../../features/itinerary/itinerarySlice';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { clusterCountLayer, clusterLayer, tripCaptionLayer, tripRouteLayer, unclusteredPointLayer } from './layers';
 
 
 export const PlannerMap = () => {
   const dispatch = useAppDispatch()
-  const theme = useTheme();
   const itinerary = useAppSelector(selectActiveItinerary)
   const cursor = useAppSelector(selectCursor)
 
@@ -20,7 +17,6 @@ export const PlannerMap = () => {
   const canvas = planner?.getCanvas()
   const canvasWidth = canvas?.width || 500
   const canvasHeight = canvas?.height || 250
-  const canvasZoom = planner?.getZoom() || 9
 
   const OnMarkerDragEnd = (e: any) => {
     const coordinates: MapCoordinates = {
@@ -45,12 +41,12 @@ export const PlannerMap = () => {
   const drawLineFeatures = (item: Itinerary, features: any[]) => {
     const coordinates = features.reduce<any[]>(
       (result, x) => [...result, x.geometry.coordinates], [])
-      
+
     return {
       "type": "Feature",
       "properties": {},
       "geometry": {
-        "type": "LineString",        
+        "type": "LineString",
         "coordinates": coordinates,
         "properties": {}
       }
@@ -62,7 +58,7 @@ export const PlannerMap = () => {
       (result, x: ItineraryItem) => [...result, cb(x)], []) || []
   }
 
-  const aggregateFeaturesForItinerary = (item: Itinerary, cb: Function) =>{
+  const aggregateFeaturesForItinerary = (item: Itinerary, cb: Function) => {
     return itinerary?.itemGroups.reduce<any[]>(
       (result, x: ItineraryItemGroup) => [...result, ...aggregateFeaturesForItineraryItemGroup(item, x.id, cb)], []) || []
   }
@@ -71,14 +67,14 @@ export const PlannerMap = () => {
     if (itinerary) {
       const features = aggregateFeaturesForItinerary(itinerary, itineraryItemToFeature)
       const lineFeatures = drawLineFeatures(itinerary, features)
-      
+
       const featureCollection =
       {
         "type": "FeatureCollection",
         "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
         "features": [...features].concat(lineFeatures)
       }
-     
+
       setItineraryFeatures(featureCollection)
     }
 
@@ -99,9 +95,9 @@ export const PlannerMap = () => {
           width: "100%",
           height: 250
         }}
-        onMove={evt => {  }}
+        onMove={evt => { }}
         // mapStyle="https://tiles.stadiamaps.com/styles/osm_bright.json"
-      mapStyle="https://tiles.stadiamaps.com/styles/stamen_watercolor.json"
+        mapStyle="https://tiles.stadiamaps.com/styles/stamen_watercolor.json"
       >
         <Marker
           longitude={cursor.longitude}

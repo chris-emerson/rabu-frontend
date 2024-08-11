@@ -1,8 +1,7 @@
 import { renderWithProviders } from '../../testing/renderComponent';
 import { THREE_DAY_ITINERARY, itineraryStateFactory } from '../../testing/factories/itineraryFactories';
 import { TripPlanner } from './TripPlanner';
-import { act, fireEvent, waitFor } from '@testing-library/react';
-import {screen} from '@testing-library/react'
+import { waitFor, screen } from '@testing-library/react';
 
 const mockGenerateItinerary = jest.fn()
 
@@ -21,13 +20,13 @@ describe('TripPlanner Component Test', () => {
                 activeItineraryItemGroupId: itinerary.itemGroups[0].id
         })}
 
-        const container = renderWithProviders(<TripPlanner/>, {
+        renderWithProviders(<TripPlanner/>, {
             preloadedState: preloadedState
         })
 
         const activeItineraryItem = itinerary.itemGroups[0].items[0]
         await waitFor(async()=>{
-            expect(container.getByTestId('ActivitySummaryTitle'))
+            expect(screen.getByTestId('ActivitySummaryTitle'))
             .toHaveTextContent(activeItineraryItem.activity)
         })
     })
@@ -42,13 +41,13 @@ describe('TripPlanner Component Test', () => {
                 activeItineraryItemGroupId: itinerary.itemGroups[0].id
         })}
 
-        const container = renderWithProviders(<TripPlanner/>, {
+        renderWithProviders(<TripPlanner/>, {
             preloadedState: preloadedState
         })
 
         const activeItineraryItem = itinerary.itemGroups[0].items[0]
         await waitFor(async()=>{
-            expect(container.getByTestId('ActivitySummaryDescription'))
+            expect(screen.getByTestId('ActivitySummaryDescription'))
             .toHaveTextContent(activeItineraryItem.description)
         })
     })
@@ -66,11 +65,11 @@ describe('TripPlanner Component Test', () => {
 
     //     mockGenerateItinerary.mockResolvedValue(() => itinerary)
 
-    //     const container = renderWithProviders(<TripPlanner/>, {
+    //     renderWithProviders(<TripPlanner/>, {
     //         preloadedState: preloadedState
     //     })
 
-    //     await waitFor(() => container.getByText(/new trip/i))
+    //     await waitFor(() => screen.getByText(/new trip/i))
 
     //     fireEvent.click(screen.getByText(/new trip/i))
     //     expect(mockGenerateItinerary).toHaveBeenCalled()

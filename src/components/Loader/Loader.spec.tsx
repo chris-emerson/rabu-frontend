@@ -1,10 +1,11 @@
 import { renderWithProviders } from '../../testing/renderComponent';
 import Loader from './Loader';
+import {screen} from '@testing-library/react'
 
 describe('Loader test', () => {
     it('should return render successfully', () => {
-        const component = renderWithProviders(<Loader/>, {})
+        renderWithProviders(<Loader/>, {})
 
-        expect(component.getByTestId("Loader")).toBeTruthy()
+        expect(screen.getByTestId("Loader")).toBeTruthy()
     })
 })

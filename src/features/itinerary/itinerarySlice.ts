@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState, AppThunk } from '../../app/store';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { RootState } from '../../app/store';
 import api from './api';
 
 export interface ItineraryItem {
@@ -74,7 +74,6 @@ export const generateItinerary = createAsyncThunk<Itinerary>(
         } catch (e) {
             throw thunkAPI.rejectWithValue({ error: e })
         }
-
     }
 );
 
@@ -137,7 +136,7 @@ export const selectActiveItinerary = (state: RootState) => {
 export const selectActiveItineraryItemGroup = (state: RootState) => {
     if (state.itinerary.activeItineraryId) {
         const itinerary = state.itinerary.itineraries.find(elem => elem.id === state.itinerary.activeItineraryId)
-        const groups = itinerary?.itemGroups.find(elem => elem.id === state.itinerary.activeItineraryItemGroupId)
+
         return itinerary?.itemGroups.find(elem => elem.id === state.itinerary.activeItineraryItemGroupId) || null
     }
 }

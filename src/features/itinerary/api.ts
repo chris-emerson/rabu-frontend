@@ -1,6 +1,6 @@
 import { Itinerary, ItineraryItem, ItineraryItemGroup } from "./itinerarySlice";
 
-async function itineraryGeneration(lat: number,long: number, placeName: string): Promise<Itinerary> {
+const itineraryGeneration = async function itineraryGeneration(lat: number,long: number, placeName: string): Promise<Itinerary> {
     return fetch('http://127.0.0.1:8000/itinerary-generation/', {
         method: "POST",
         mode: "cors",
@@ -53,6 +53,7 @@ async function itineraryGeneration(lat: number,long: number, placeName: string):
     });
   }
 
-  export default {
+  const api = {
     itineraryGeneration: itineraryGeneration
   }
+  export default api

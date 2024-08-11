@@ -1,5 +1,5 @@
 import { IconButton, ImageListItem, ImageListItemBar } from "@mui/material"
-import { ItineraryItem, MapCoordinates, actions } from "../../features/itinerary/itinerarySlice";
+import { ItineraryItem, actions } from "../../features/itinerary/itinerarySlice";
 import { useAppDispatch } from "../../app/hooks";
 import { Info } from "@mui/icons-material";
 import { useMap } from "react-map-gl/maplibre";
@@ -20,12 +20,6 @@ export const Activity = (props: ActivityProps) => {
         dispatch(actions.setActiveItineraryItem(item.id.toString()))
         dispatch(actions.setActiveItineraryItemGroup(item.itemGroup.toString()))
 
-        const coordinates: MapCoordinates = {
-            longitude: item.longitude!,
-            latitude: item.latitude!,
-            zoom: 12
-          }
-    
         if (planner) {
             planner.flyTo({
                 center: [item.longitude!, item.latitude!],
