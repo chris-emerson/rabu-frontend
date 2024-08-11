@@ -1,5 +1,12 @@
+body {
+  overscroll-behavior: none;
+  touch-action: none;
+  height: auto;
+}
+
 .App {
   text-align: center;
+  height: auto;
 }
 
 .App-logo {
@@ -36,4 +43,14 @@
   100% {
     transform: translateY(0px);
   }
+}
+.maplibregl-ctrl-bottom-right  {
+  display: none;
+}
+
+.dancing-script-hw {
+  font-family: "Dancing Script", cursive;
+  font-optical-sizing: auto;
+  font-weight: normal;
+  font-style: normal;
 }
