@@ -51,7 +51,6 @@ export const TripPlanner = () => {
             <Tabs
                 value={activeTab}
                 onChange={(e, newTabIndexValue) => {
-                    console.log(newTabIndexValue)
                     setActiveTab(newTabIndexValue)
                     const newActiveItemGroupId = itinerary!.itemGroups[newTabIndexValue].id
                     dispatch(actions.setActiveItineraryItemGroup(newActiveItemGroupId))

@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState, AppThunk } from '../../app/store';
-import {itineraryGeneration} from './api';
+import api from './api';
 
 export interface ItineraryItem {
     id: string,
@@ -64,7 +64,7 @@ export const generateItinerary = createAsyncThunk<Itinerary>(
         const state = thunkAPI.getState() as RootState
 
         const placename = "test";
-        const response = await itineraryGeneration(
+        const response = await api.itineraryGeneration(
             state.itinerary.searchCursorPosition.latitude,
             state.itinerary.searchCursorPosition.longitude,
             placename);

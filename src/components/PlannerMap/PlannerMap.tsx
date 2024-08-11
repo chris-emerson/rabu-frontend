@@ -46,7 +46,6 @@ export const PlannerMap = () => {
     const coordinates = features.reduce<any[]>(
       (result, x) => [...result, x.geometry.coordinates], [])
       
-      console.log('coords', coordinates)
     return {
       "type": "Feature",
       "properties": {},
@@ -72,8 +71,6 @@ export const PlannerMap = () => {
     if (itinerary) {
       const features = aggregateFeaturesForItinerary(itinerary, itineraryItemToFeature)
       const lineFeatures = drawLineFeatures(itinerary, features)
-
-      console.log('features', features)
       
       const featureCollection =
       {
@@ -81,7 +78,6 @@ export const PlannerMap = () => {
         "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
         "features": [...features].concat(lineFeatures)
       }
-      console.log("collection", featureCollection)
      
       setItineraryFeatures(featureCollection)
     }
